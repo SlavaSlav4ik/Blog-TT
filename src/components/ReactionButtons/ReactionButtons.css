@@ -1,0 +1,18 @@
+.reaction-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.reaction-button {
+    background: #f1f1f1;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s ease;
+}
+
+.reaction-button:hover {
+    background: #e0e0e0;
+}
