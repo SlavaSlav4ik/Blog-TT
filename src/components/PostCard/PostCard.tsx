@@ -8,7 +8,7 @@ import './PostCard.css';
 
 interface Props {
     post: Post;
-    fullWidth?: boolean;
+    fullWidth?: boolean; // Если true — это большой пост
 }
 
 const PostCard: React.FC<Props> = ({ post, fullWidth }) => {
@@ -16,7 +16,7 @@ const PostCard: React.FC<Props> = ({ post, fullWidth }) => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(initPostReactions(post.id));
+        dispatch(initPostReactions(post.id)); // Инициализация реакций
     }, [dispatch, post.id]);
 
     return (
@@ -24,10 +24,28 @@ const PostCard: React.FC<Props> = ({ post, fullWidth }) => {
             className={fullWidth ? 'post-card full' : 'post-card'}
             onClick={() => nav(`/posts/${post.id}`)}
         >
-            <img src={`https://placehold.co/600x200`} alt="" />
-            <h2>{post.title}</h2>
-            <p>{post.body.slice(0, 100)}…</p>
-            <ReactionButtons postId={post.id} />
+            <div className="img_post">
+                <img
+                    className="img_post_ns"
+                    src={fullWidth
+                        ? 'https://placehold.co/800x300'
+                        : 'https://placehold.co/560x430'}
+                    alt="post"
+                />
+
+                <h2 className="post-title">{post.title}</h2>
+
+                {fullWidth && (
+                    <p className="post-body-preview">
+                        {post.body.slice(0, 150)}…
+                    </p>
+                )}
+
+                <div className="main_txt">
+                    <ReactionButtons postId={post.id} />
+                    <div className="read-more-link">Читать далее</div>
+                </div>
+            </div>
         </div>
     );
 };

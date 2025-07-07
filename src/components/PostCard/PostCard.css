@@ -1,33 +1,97 @@
+/*Базовой стиль*/
 .post-card {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    padding: 20px;
-    transition: box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    overflow: hidden;
 }
 
 .post-card:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 }
 
+/* Заголовок */
 .post-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 12px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 16px 16px 8px;
+    color: #111;
+    line-height: 1.3;
 }
 
-.post-excerpt {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 16px;
+/*Кнопка*/
+.read-more-button {
+    padding: 6px 18px;
+    border-radius: 999px;
+    border: 1.5px solid black;
+    background: transparent;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
-.post-footer {
+.read-more-button:hover {
+    background-color: black;
+    color: white;
+}
+
+/*Реакции + кнопка читать*/
+.main_txt {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 16px 16px;
+    margin-top: 8px;
+}
+
+/*Карточки*/
+.post-card.full {
+    width: 100%;
+    margin-bottom: 32px;
+}
+
+.post-card.full .post-title {
+    font-size: 1.8rem;
+    margin: 24px 24px 12px;
+}
+
+.post-card.full .post-body-preview {
+    font-size: 1rem;
+    color: #444;
+    margin: 0 24px 24px;
+    line-height: 1.6;
+}
+
+
+.img_post_ns {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+}
+
+.read-more-link {
+    /* Стили кнопки */
+    padding: 6px 18px;
+    border-radius: 999px;
+    border: 1.5px solid black;
+    background: transparent;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    color: #000;
+
+    text-decoration: none;
+    display: inline-block;
+}
+
+/*При наводки на буттон*/
+.read-more-link:hover {
+    background-color: black;
+    color: white;
 }

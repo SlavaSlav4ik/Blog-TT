@@ -19,31 +19,66 @@ const reactionsSlice = createSlice({
                     likes: Math.floor(Math.random() * 51),
                     dislikes: Math.floor(Math.random() * 51),
                     favorite: false,
+                    userReaction: null,
                 };
             }
         },
+
         like(state, action: PayloadAction<number>) {
             const id = action.payload;
-            if (!state[id]) {
-                state[id] = { likes: 0, dislikes: 0, favorite: false };
+            const post = state[id] ?? {
+                likes: 0,
+                dislikes: 0,
+                favorite: false,
+                userReaction: null,
+            };
+
+            if (post.userReaction === 'like') {
+                post.likes--;
+                post.userReaction = null;
+            } else {
+                if (post.userReaction === 'dislike') post.dislikes--;
+                post.likes++;
+                post.userReaction = 'like';
             }
-            state[id].likes++;
+
+            state[id] = post;
         },
+
         dislike(state, action: PayloadAction<number>) {
             const id = action.payload;
-            if (!state[id]) {
-                state[id] = { likes: 0, dislikes: 0, favorite: false };
+            const post = state[id] ?? {
+                likes: 0,
+                dislikes: 0,
+                favorite: false,
+                userReaction: null,
+            };
+
+            if (post.userReaction === 'dislike') {
+                post.dislikes--;
+                post.userReaction = null;
+            } else {
+                if (post.userReaction === 'like') post.likes--;
+                post.dislikes++;
+                post.userReaction = 'dislike';
             }
-            state[id].dislikes++;
+
+            state[id] = post;
         },
+
         toggleFavorite(state, action: PayloadAction<number>) {
             const id = action.payload;
-            if (!state[id]) {
-                state[id] = { likes: 0, dislikes: 0, favorite: false };
-            }
-            state[id].favorite = !state[id].favorite;
+            const post = state[id] ?? {
+                likes: 0,
+                dislikes: 0,
+                favorite: false,
+                userReaction: null,
+            };
+
+            post.favorite = !post.favorite;
+            state[id] = post;
         },
-    }
+    },
 });
 
 export function subscribeReactions(store: { subscribe: (cb: () => void) => void; getState: () => any }) {

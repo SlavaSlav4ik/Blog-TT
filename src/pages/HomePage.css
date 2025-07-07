@@ -1,48 +1,72 @@
 .homepage {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 3rem;
 }
 
 .homepage-info {
-    display: grid;
-    justify-items: center;
-    .txtP {
-        font-size: 1.5rem;
-    }
-    .one-title {
-        font-size: 3.75rem;
-    }
+    text-align: center;
+    max-width: 800px;
+}
+
+.one-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: #111;
+}
+
+.txtP {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: #555;
 }
 
 .status {
     text-align: center;
-    color: gray;
+    color: #888;
+    font-size: 1.1rem;
 }
 
+/* Сетка постов */
 .posts {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    gap: 3rem;
 }
 
 .post-large {
-    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .post-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
+}
+
+.post-large {
+    margin-bottom: 2rem;
 }
 
 
-@media (max-width: 768px) {
+/* Адаптивность */
+@media (max-width: 1024px) {
     .post-grid {
         grid-template-columns: 1fr;
+    }
+
+    .one-title {
+        font-size: 2.5rem;
+    }
+
+    .txtP {
+        font-size: 1rem;
     }
 }
