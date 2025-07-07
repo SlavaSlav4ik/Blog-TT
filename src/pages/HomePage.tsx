@@ -40,11 +40,24 @@ const HomePage: React.FC = () => {
             </div>
 
             {/*  Поиск */}
-            <SearchBar value={query} onSearch={(q) => dispatch(setQuery(q))} />
+            <SearchBar
+                value={query}
+                onSearch={(q) => dispatch(setQuery(q))}
+
+            />
+            {/*  Роботает только после окончание написание 400 мс DEBAUNS */}
 
             {/* ⚠ Статусы загрузки */}
             {status === 'loading' && <p className="status">Загрузка...</p>}
             {status === 'failed' && <p className="status">Ошибка при загрузке</p>}
+
+            {/* 🔍 Если ничего не найдено */}
+            {status === 'succeeded' && items.length === 0 && (
+                <div className="no-results">
+                    <p className="no-results__text">😕 Ничего не найдено по запросу 😕</p>
+                </div>
+            )}
+
 
             {/*  Посты */}
             {bigPost && (
