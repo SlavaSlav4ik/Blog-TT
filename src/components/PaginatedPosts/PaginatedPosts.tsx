@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './PaginatedPosts.css';
 import { Post } from '../../types';
+import PostCard from '../PostCard/PostCard';
 
 const POSTS_PER_PAGE = 6;
 const PAGINATION_WINDOW = 10; // Страниц в доступе показа
@@ -37,26 +38,21 @@ const PaginatedPosts: React.FC<PaginatedPostsProps> = ({ posts }) => {
     };
 
     return (
-        <div>
+        <div className="paginated-container">
+            {/* Список постов текущей страницы */}
+            <div className="post-grid">
+                {currentPosts.map((post) => (
+                    <PostCard key={post.id} post={post} />
+                ))}
+            </div>
+
+            {/* Пагинация */}
             <div className="pagination">
                 {/* Кнопка "Назад" */}
                 {currentPage > 1 && (
                     <button onClick={() => setCurrentPage(currentPage - 1)}>
                         ←
                     </button>
-                )}
-
-                {/* Первая страница (если не видна в диапазоне) */}
-                {start > 1 && (
-                    <>
-                        <button
-                            onClick={() => setCurrentPage(1)}
-                            className={currentPage === 1 ? 'active' : ''}
-                        >
-                            1
-                        </button>
-                        {start > 2 && <span className="ellipsis">...</span>}
-                    </>
                 )}
 
                 {/* Основной диапазон страниц */}
@@ -73,41 +69,12 @@ const PaginatedPosts: React.FC<PaginatedPostsProps> = ({ posts }) => {
                     );
                 })}
 
-                {/* Последняя страница (если не видна в диапазоне) */}
-                {end < totalPages && (
-                    <>
-                        {end < totalPages - 1 && <span className="ellipsis">...</span>}
-                        <button
-                            onClick={() => setCurrentPage(totalPages)}
-                            className={currentPage === totalPages ? 'active' : ''}
-                        >
-                            {totalPages}
-                        </button>
-                    </>
-                )}
-
                 {/* Кнопка "Вперед" */}
                 {currentPage < totalPages && (
                     <button onClick={() => setCurrentPage(currentPage + 1)}>
                         →
                     </button>
                 )}
-
-                {/* Кнопки быстрого перехода */}
-                <div className="quick-jump">
-                    <button
-                        onClick={() => jumpPages(5)}
-                        disabled={currentPage + 5 > totalPages}
-                    >
-                        +5
-                    </button>
-                    <button
-                        onClick={() => jumpPages(10)}
-                        disabled={currentPage + 10 > totalPages}
-                    >
-                        +10
-                    </button>
-                </div>
             </div>
         </div>
     );

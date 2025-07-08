@@ -5,7 +5,6 @@ import { setQuery } from '../features/search/searchSlice';
 import PostCard from '../components/PostCard/PostCard';
 import SearchBar from '../components/SearchBar/SearchBar';
 import PaginatedPosts from '../components/PaginatedPosts/PaginatedPosts';
-
 import './HomePage.css';
 
 const HomePage: React.FC = () => {
@@ -30,7 +29,7 @@ const HomePage: React.FC = () => {
 
     return (
         <div className="homepage">
-            {/*  Заголовок страницы */}
+            {/* Заголовок страницы */}
             <div className="homepage-info">
                 <h1 className="one-title">Блог</h1>
                 <p className="txtP">
@@ -39,43 +38,35 @@ const HomePage: React.FC = () => {
                 </p>
             </div>
 
-            {/*  Поиск */}
+            {/* Поиск */}
             <SearchBar
                 value={query}
                 onSearch={(q) => dispatch(setQuery(q))}
-
             />
-            {/*  Роботает только после окончание написание 400 мс DEBAUNS */}
 
-            {/* ⚠ Статусы загрузки */}
+            {/* Статусы загрузки */}
             {status === 'loading' && <p className="status">Загрузка...</p>}
             {status === 'failed' && <p className="status">Ошибка при загрузке</p>}
 
-            {/* 🔍 Если ничего не найдено */}
+            {/* Если ничего не найдено */}
             {status === 'succeeded' && items.length === 0 && (
                 <div className="no-results">
                     <p className="no-results__text">😕 Ничего не найдено по запросу 😕</p>
                 </div>
             )}
 
-
-            {/*  Посты */}
+            {/* Посты */}
             {bigPost && (
                 <div className="posts">
-                    {/*Лонг пост*/}
+                    {/* Лонг пост */}
                     <div className="post-large">
                         <PostCard post={bigPost} fullWidth />
                     </div>
 
-                    {/*  6 маленьких постов */}
-                    <div className="post-grid">
-                        {smallPosts.map((post) => (
-                            <PostCard key={post.id} post={post} />
-                        ))}
-                    </div>
-
-                    {/*Пангин посты*/}
-                    <PaginatedPosts posts={remainingPosts} />
+                    {/* Пагинированные посты */}
+                    {remainingPosts.length > 0 && (
+                        <PaginatedPosts posts={remainingPosts} />
+                    )}
                 </div>
             )}
         </div>
